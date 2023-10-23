@@ -4,6 +4,7 @@ class Jogador:
         self.idade = idade
         self.pontos = 0
         self.__cartas = []
+        self.jogou = False
 
     def comprar_cartas(self, carta):
         self.__cartas.append(carta)
@@ -13,6 +14,9 @@ class Jogador:
     
     def setCartas(self, cartas):
         self.__cartas = cartas
+
+    def getJogou(self):
+        return self.jogou
     
     def totalCartas(self):
         valorTotal = 0

@@ -1,5 +1,4 @@
 import random
-from jogador import Jogador
 
 class Dealer:
     def __init__(self, id: str):

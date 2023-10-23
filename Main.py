@@ -4,6 +4,7 @@ from dealer import Dealer
 dealer = Dealer(10)
 
 jogadores = []
+
 qtd = int(input("Quantos jogadores vão jogar?: "))
 
 for i in range(qtd):
@@ -29,6 +30,7 @@ for i in range(qtd):
             print(f"Pontos totais: {jogadores[i].totalCartas()}")
             print(f"Seus pontos ultrapassaram 21, Você perdeu!")
             break
+        
         else:
             print("-=" * 20)
             print(f"Jogador {i + 1}")
