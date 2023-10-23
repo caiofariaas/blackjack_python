@@ -14,9 +14,12 @@ class Jogador:
     
     def setCartas(self, cartas):
         self.__cartas = cartas
-
+        
     def getJogou(self):
         return self.jogou
+    
+    def parar(self):
+        self.jogou = True
     
     def totalCartas(self):
         valorTotal = 0

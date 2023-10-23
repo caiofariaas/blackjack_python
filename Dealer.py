@@ -16,4 +16,3 @@ class Dealer:
     def compraCarta(self):
         carta = random.choice(self.cards)
         return carta
-    
