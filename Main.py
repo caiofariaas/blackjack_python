@@ -1,19 +1,34 @@
-from Jogador import jogador
-from Dealer import Dealer
+from jogador import Jogador
+from dealer import Dealer
 
+dealer = Dealer(10)
 
+jogadores = []
+qtd = int(input("Quantos jogadores vão jogar?: "))
 
-
-dealer = Dealer(10, )
-
-for i in range (2):
+for i in range(qtd):
     nome = input(f"Digite o nome do Jogador {i + 1}: ")
     idade = int(input(f"Digite a idade do Jogador {i + 1}: "))
+    jogador = Jogador(nome, idade)
+    jogadores.append(jogador)
 
-    if i == 0:
-        jogador1 = jogador(nome, idade)
-    elif i == 1:
-        jogador2 = jogador(nome, idade)
+for jogador in jogadores:
+    dealer.distribuirCartas(jogador)
 
-print(jogador1.idade)
-print(jogador2.idade)
+for i in range(qtd):
+    print(f"Jogador {i + 1}")
+    print(f"Suas cartas : {jogadores[i].getCartas()}")
+    print(f"Pontos totais: {jogadores[i].totalCartas()}")
+
+    opt = int(input("Deseja comprar mais uma carta? (1 - Sim | 2 - nao) : "))
+
+    if opt == 1:
+        jogadores[i].comprar_cartas(dealer.compraCarta())
+        print("-=" * 20)
+        print(f"Jogador {i + 1}")
+        print(f"Suas cartas : {jogadores[i].getCartas()}")
+        print(f"Pontos totais: {jogadores[i].totalCartas()}")
+        print("-=" * 20)
+    elif opt == 2:
+        pass
+        
