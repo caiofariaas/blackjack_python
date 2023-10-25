@@ -6,7 +6,6 @@ class Jogador:
         self.__cartas = []
         self.jogou = False
 
-
     def comprar_cartas(self, carta):
         self.__cartas.append(carta)
 

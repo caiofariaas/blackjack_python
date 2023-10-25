@@ -19,7 +19,7 @@ class Dealer:
         carta = random.choice(self.cards)
         return carta
 
-    def __vencedor(self, jogadores):
+    def vencedor(self, jogadores):
         vencedor = None
         maior_pontuacao = -1
         
@@ -28,4 +28,11 @@ class Dealer:
             if pontos > maior_pontuacao:
                 maior_pontuacao = pontos
                 vencedor = jogador
-        return jogador
+        return vencedor
+
+    def todos_pararam(self, jogadores):
+        for jogador in jogadores:
+            if jogador.getJogou():
+                return False
+        return True
+        
