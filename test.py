@@ -14,19 +14,10 @@ for i in range(qtd):
     jogadores.append(jogador)
 
 for jogador in jogadores:
-    if jogador.idade < 18:
-        jogadores.remove(jogador)
-        print("-=" * 23)
-        print(f"O jogador {jogador.nome} foi removido por ser menor de idade")
-        print("-=" * 23)
-        qtd = len(jogadores)
-
-for jogador in jogadores:
-    card = dealer.distribuirCartas(jogador)
+    dealer.distribuirCartas(jogador)
 
 while True:
     for i in range(qtd):
-
         if jogadores[i].getJogou() == True:
             continue
 
@@ -37,32 +28,34 @@ while True:
         opt = int(input("Deseja comprar mais uma carta? (1 - Sim | 2 - nao ) : "))
 
         if opt == 1:
-            jogadores[i].comprar_cartas(dealer.compraCarta())
+            jogadores[i].comprar_cartas(dealer.compra_carta())
             
             if jogadores[i].totalCartas() == 21:
                 print(f"O jogador {jogadores[i].nome()} completou 21 e ganhou o jogo!")
 
-            elif jogadores[i].totalCartas() > 21:
-                print(f"Pontos totais: {jogadores[i].totalCartas()}")
-                print(f"Seus pontos ultrapassaram 21, Você perdeu!\n")
-                jogadores[i].parar()
-
-            elif jogadores[i].getJogou() == True:
-                pass
-            
             else:
-                print("-=" * 20)
-                print(f"Jogador {i + 1}")
-                print(f"Suas cartas : {jogadores[i].getCartas()}")
-                print(f"Pontos totais: {jogadores[i].totalCartas()}")
-                print("-=" * 20)
-                
-                opt2 = int(input("\nSelecione uma das opções\n1 <- Parar\n2 <- Continuar\nR: "))
-                
-                if opt2 == 1:
+
+                if jogadores[i].totalCartas() > 21:
+                    print(f"Pontos totais: {jogadores[i].totalCartas()}")
+                    print(f"Seus pontos ultrapassaram 21, Você perdeu!\n")
                     jogadores[i].parar()
-                elif opt2 == 2:
+
+                elif jogadores[i].getJogou() == True:
                     pass
+                
+                else:
+                    print("-=" * 20)
+                    print(f"Jogador {i + 1}")
+                    print(f"Suas cartas : {jogadores[i].getCartas()}")
+                    print(f"Pontos totais: {jogadores[i].totalCartas()}")
+                    print("-=" * 20)
+                    
+                    opt2 = int(input("\nSelecione uma das opções\n1 <- Parar\n2 <- Continuar\nR: "))
+                    
+                    if opt2 == 1:
+                        jogadores[i].parar()
+                    elif opt2 == 2:
+                        pass
                 
         elif opt == 2:
             opt2 = int(input("Selecione uma das opções\n1 <- Parar\n2 <- Continuar\nR: "))
