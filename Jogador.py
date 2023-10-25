@@ -1,10 +1,12 @@
 class Jogador:
-    def __init__(self, nome: str, idade: int):
+    def __init__(self, nome: str, idade: int, carteira: float):
         self.nome = nome
         self.idade = idade
         self.pontos = 0
         self.__cartas = []
         self.jogou = False
+        self.__carteira = carteira
+
 
     def comprar_cartas(self, carta):
         self.__cartas.append(carta)

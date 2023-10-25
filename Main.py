@@ -1,5 +1,5 @@
-from jogador import Jogador
-from dealer import Dealer
+from Jogador import Jogador
+from Dealer import Dealer
 
 dealer = Dealer(10)
 
@@ -30,7 +30,7 @@ while True:
         if jogadores[i].getJogou() == True:
             continue
 
-        print(f"Jogador {i + 1}")
+        print(f"Jogador: {jogadores[i].nome}")
         print(f"Suas cartas : {jogadores[i].getCartas()}")
         print(f"Pontos totais: {jogadores[i].totalCartas()}")
     
@@ -40,7 +40,7 @@ while True:
             jogadores[i].comprar_cartas(dealer.compraCarta())
             
             if jogadores[i].totalCartas() == 21:
-                print(f"O jogador {jogadores[i].nome()} completou 21 e ganhou o jogo!")
+                print(f"O jogador {jogadores[i].nome} completou 21 e ganhou o jogo!")
 
             elif jogadores[i].totalCartas() > 21:
                 print(f"Pontos totais: {jogadores[i].totalCartas()}")
@@ -52,7 +52,7 @@ while True:
             
             else:
                 print("-=" * 20)
-                print(f"Jogador {i + 1}")
+                print(f"Jogador: {jogadores[i].nome}")
                 print(f"Suas cartas : {jogadores[i].getCartas()}")
                 print(f"Pontos totais: {jogadores[i].totalCartas()}")
                 print("-=" * 20)
@@ -61,6 +61,9 @@ while True:
                 
                 if opt2 == 1:
                     jogadores[i].parar()
+                    print("-" * 26)
+                    print(f"O jogador {jogadores[i].nome} parou!")
+                    print("-" * 26)
                 elif opt2 == 2:
                     pass
                 
@@ -69,6 +72,9 @@ while True:
                 
             if opt2 == 1:
                 jogadores[i].parar()
+                print("-" * 26)
+                print(f"O jogador {jogadores[i].nome} parou!")
+                print("-" * 26)
             elif opt2 == 2:
                 pass
             pass
