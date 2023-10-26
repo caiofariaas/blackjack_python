@@ -4,6 +4,7 @@ from Dealer import Dealer
 dealer = Dealer(10)
 
 jogadores = []
+jogadores_final = []
 
 qtd = int(input("Quantos jogadores vão jogar?: "))
 
@@ -27,10 +28,6 @@ if len(jogadores) == 0:
     print("-=" * 19)
     exit()
     
-elif dealer.todos_pararam(jogadores) == True:
-    vencedor = dealer.vencedor(jogadores)    
-    print(vencedor.nome)
-
 else:
     for jogador in jogadores:
         card = dealer.distribuirCartas(jogador)
@@ -52,11 +49,13 @@ else:
                 
                 if jogadores[i].totalCartas() == 21:
                     print(f"O jogador {jogadores[i].nome} completou 21 e ganhou o jogo!")
+                    exit()
 
                 elif jogadores[i].totalCartas() > 21:
                     print(f"Pontos totais: {jogadores[i].totalCartas()}")
                     print(f"Seus pontos ultrapassaram 21, Você perdeu!\n")
                     jogadores[i].parar()
+                    
 
                 elif jogadores[i].getJogou() == True:
                     pass
@@ -75,7 +74,7 @@ else:
                         print("-" * 26)
                         print(f"O jogador {jogadores[i].nome} parou!")
                         print("-" * 26)
-                
+
                     elif opt2 == 2:
                         pass
                     
@@ -90,4 +89,3 @@ else:
                     
                 elif opt2 == 2:
                     pass
-                pass
