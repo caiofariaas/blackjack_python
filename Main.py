@@ -79,8 +79,7 @@ else:
                     print(f"Jogador: {jogadores[i].nome}")
                     print(f"Pontos totais: {jogadores[i].totalCartas()}")
                     print(f"Seus pontos ultrapassaram 21, Você perdeu!\n")
-                    jogadores[i].parar()
-                    
+                    jogadores[i].parar_estouro() 
 
                 elif jogadores[i].getJogou() == True:
                     pass
@@ -133,6 +132,10 @@ else:
                     
                 elif opt2 == 2:
                     pass
+            
+            if dealer.countParou(jogadores) == 1:
+                print(dealer.vencedor(jogadores))
+                exit()
 
             if dealer.todos_pararam(jogadores) == True:
                 print("-" * 26)

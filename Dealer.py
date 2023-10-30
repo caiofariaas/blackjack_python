@@ -14,7 +14,6 @@ class Dealer:
             self.cards.remove(carta)
         jogador.setCartas(jogador_cartas)
 
-    
     def compraCarta(self):
         carta = random.choice(self.cards)
         return carta
@@ -35,3 +34,11 @@ class Dealer:
             if jogador.getJogou() == False:
                 return False
         return True
+
+    def countParou(self, jogadores):
+        contador = 0
+
+        for jogador in jogadores:
+            if jogador.getJogou() == False:
+                contador += 1
+        return contador

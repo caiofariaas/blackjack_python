@@ -31,3 +31,10 @@ class Jogador:
             else:
                 valorTotal += carta
         return valorTotal
+
+    def __estorou(self):
+        return self.totalCartas() > 21
+
+    def parar_estouro(self):
+        if self.__estorou():
+            self.jogou = True
