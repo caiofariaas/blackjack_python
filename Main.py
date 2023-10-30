@@ -6,11 +6,26 @@ dealer = Dealer(10)
 jogadores = []
 jogadores_final = []
 
-qtd = int(input("Quantos jogadores vão jogar?: "))
+while True:
+    try:
+        qtd = int(input("Quantos jogadores vão jogar?: "))
+        break
+    except(ValueError):
+        print("-=" * 20)
+        print("Valor inválido!, digite um valor inteiro.")
+        print("-=" * 20)
 
 for i in range(qtd):
     nome = input(f"Digite o nome do Jogador {i + 1}: ")
-    idade = int(input(f"Digite a idade do Jogador {i + 1}: "))
+    while True:
+        try:
+            idade = int(input(f"Digite a idade do Jogador {i + 1}: "))
+            break
+        except(ValueError):
+            print("-=" * 20)
+            print("Valor inválido!, digite um valor inteiro.")
+            print("-=" * 20)
+
     jogador = Jogador(nome, idade)
     jogadores.append(jogador)
 
@@ -43,9 +58,16 @@ else:
             print(f"Jogador: {jogadores[i].nome}")
             print(f"Suas cartas : {jogadores[i].getCartas()}")
             print(f"Pontos totais: {jogadores[i].totalCartas()}")
-        
-            opt = int(input("Deseja comprar mais uma carta? (1 - Sim | 2 - nao ) : "))
 
+            while True:
+                try:
+                    opt = int(input("Deseja comprar mais uma carta? (1 - Sim | 2 - nao ) : "))
+                    break
+                except(ValueError):
+                    print("-=" * 20)
+                    print("Valor inválido!, digite um valor inteiro.")
+                    print("-=" * 20)
+                    
             if opt == 1:
                 jogadores[i].comprar_cartas(dealer.compraCarta())
                 
@@ -54,6 +76,7 @@ else:
                     exit()
 
                 elif jogadores[i].totalCartas() > 21:
+                    print(f"Jogador: {jogadores[i].nome}")
                     print(f"Pontos totais: {jogadores[i].totalCartas()}")
                     print(f"Seus pontos ultrapassaram 21, Você perdeu!\n")
                     jogadores[i].parar()
@@ -69,8 +92,15 @@ else:
                     print(f"Pontos totais: {jogadores[i].totalCartas()}")
                     print("-=" * 20)
                     
-                    opt2 = int(input("\nSelecione uma das opções\n1 <- Parar\n2 <- Continuar\nR: "))
-                    
+                    while True:
+                        try:
+                            opt2 = int(input("\nSelecione uma das opções\n1 <- Parar\n2 <- Continuar\nR: "))
+                            break
+                        except(ValueError):
+                            print("-=" * 20)
+                            print("Valor inválido!, digite um valor inteiro.")
+                            print("-=" * 20)
+
                     if opt2 == 1:
                         jogadores[i].parar()
                         print("-" * 26)
@@ -85,8 +115,15 @@ else:
                         print("Todos pararam")
                     
             elif opt == 2:
-                opt2 = int(input("Selecione uma das opções\n1 <- Parar\n2 <- Continuar\nR: "))
-                    
+                while True:
+                    try:
+                        opt2 = int(input("Selecione uma das opções\n1 <- Parar\n2 <- Continuar\nR: "))
+                        break
+                    except(ValueError):
+                        print("-=" * 20)
+                        print("Valor inválido!, digite um valor inteiro.")
+                        print("-=" * 20)
+
                 if opt2 == 1:
                     jogadores[i].parar()
                     print("-" * 26)
@@ -100,6 +137,6 @@ else:
             if dealer.todos_pararam(jogadores) == True:
                 print("-" * 26)
                 print("Todos os jogadores pararam!")
-                print(f"{dealer.vencedor(jogadores)}!!")
+                print(f"{dealer.vencedor(jogadores)} !")
                 print("-" * 26)
                 break
