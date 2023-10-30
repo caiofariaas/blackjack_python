@@ -28,11 +28,10 @@ class Dealer:
             if pontos > maior_pontuacao:
                 maior_pontuacao = pontos
                 vencedor = jogador.nome
-        return vencedor
+        return f"Jogador Vencedor: {vencedor}\nPontos: {maior_pontuacao}"
 
     def todos_pararam(self, jogadores):
         for jogador in jogadores:
             if jogador.getJogou() == False:
                 return False
         return True
-gir

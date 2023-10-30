@@ -14,13 +14,15 @@ for i in range(qtd):
     jogador = Jogador(nome, idade)
     jogadores.append(jogador)
 
-for jogador in jogadores:
-    if jogador.idade < 18:
-        jogadores.remove(jogador)
-        print("-=" * 23)
-        print(f"O jogador {jogador.nome} foi removido por ser menor de idade")
-        print("-=" * 23)
-        qtd = len(jogadores)
+for i in range(qtd):
+    if jogadores[i].idade >= 18:
+        jogadores_final.append(jogadores[i]) 
+    else:
+        print("-=" * 25)
+        print(f"O jogador {jogadores[i].nome} foi removido por ser menor de idade")
+        print("-=" * 25)
+
+jogadores = jogadores_final
         
 if len(jogadores) == 0:
     print("-=" * 19)
@@ -37,8 +39,6 @@ else:
 
             if jogadores[i].getJogou() == True:
                 continue
-            if dealer.todos_pararam(jogadores) == False:
-                print("a")
                 
             print(f"Jogador: {jogadores[i].nome}")
             print(f"Suas cartas : {jogadores[i].getCartas()}")
@@ -80,6 +80,9 @@ else:
 
                     elif opt2 == 2:
                         pass
+
+                    if dealer.todos_pararam(jogadores) == True:
+                        print("Todos pararam")
                     
             elif opt == 2:
                 opt2 = int(input("Selecione uma das opções\n1 <- Parar\n2 <- Continuar\nR: "))
@@ -94,8 +97,9 @@ else:
                 elif opt2 == 2:
                     pass
 
-        
-        print("-" * 26)
-        print(f"Jogador Vencedor: {dealer.vencedor(jogadores)}!!")
-        print("-" * 26)
-        break
+            if dealer.todos_pararam(jogadores) == True:
+                print("-" * 26)
+                print("Todos os jogadores pararam!")
+                print(f"{dealer.vencedor(jogadores)}!!")
+                print("-" * 26)
+                break
