@@ -37,7 +37,9 @@ else:
 
             if jogadores[i].getJogou() == True:
                 continue
-
+            if dealer.todos_pararam(jogadores) == False:
+                print("a")
+                
             print(f"Jogador: {jogadores[i].nome}")
             print(f"Suas cartas : {jogadores[i].getCartas()}")
             print(f"Pontos totais: {jogadores[i].totalCartas()}")
@@ -74,6 +76,7 @@ else:
                         print("-" * 26)
                         print(f"O jogador {jogadores[i].nome} parou!")
                         print("-" * 26)
+                        qtd -= 1
 
                     elif opt2 == 2:
                         pass
@@ -86,6 +89,13 @@ else:
                     print("-" * 26)
                     print(f"O jogador {jogadores[i].nome} parou!")
                     print("-" * 26)
+                    qtd -= 1
                     
                 elif opt2 == 2:
                     pass
+
+        
+        print("-" * 26)
+        print(f"Jogador Vencedor: {dealer.vencedor(jogadores)}!!")
+        print("-" * 26)
+        break
