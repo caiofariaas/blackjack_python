@@ -132,14 +132,10 @@ else:
                     
                 elif opt2 == 2:
                     pass
-            
-            if dealer.countParou(jogadores) == 1:
-                print(dealer.vencedor(jogadores))
-                exit()
 
             if dealer.todos_pararam(jogadores) == True:
                 print("-" * 26)
                 print("Todos os jogadores pararam!")
                 print(f"{dealer.vencedor(jogadores)} !")
                 print("-" * 26)
-                break
+                exit()

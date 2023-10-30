@@ -24,21 +24,14 @@ class Dealer:
         
         for jogador in jogadores:
             pontos = jogador.totalCartas()
-            if pontos > maior_pontuacao:
+            if pontos > maior_pontuacao and pontos < 21:
                 maior_pontuacao = pontos
                 vencedor = jogador.nome
         return f"Jogador Vencedor: {vencedor}\nPontos: {maior_pontuacao}"
+
 
     def todos_pararam(self, jogadores):
         for jogador in jogadores:
             if jogador.getJogou() == False:
                 return False
         return True
-
-    def countParou(self, jogadores):
-        contador = 0
-
-        for jogador in jogadores:
-            if jogador.getJogou() == False:
-                contador += 1
-        return contador
