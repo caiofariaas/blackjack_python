@@ -6,6 +6,7 @@ class Jogador:
         self.__cartas = []
         self.jogou = False
         self.__saldo = 3000
+        self.__apostou = False
 
     def comprar_cartas(self, carta):
         self.__cartas.append(carta)
@@ -48,4 +49,9 @@ class Jogador:
             self.__saldo += newSaldo
         elif tf == False:
             self.__saldo -= newSaldo
-            
+
+    def setApostou(self, yn):
+        self.__apostou = yn
+
+    def getApostou(self):
+        return self.__apostou

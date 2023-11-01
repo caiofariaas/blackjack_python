@@ -18,7 +18,7 @@ class Dealer:
         carta = random.choice(self.cards)
         return carta
 
-    def vencedor(self, jogadores):
+    def vencedor(self, jogadores, apostas):
         vencedor = None
         maior_pontuacao = -1
         
@@ -26,12 +26,13 @@ class Dealer:
             pontos = jogador.totalCartas()
             if pontos > maior_pontuacao and pontos < 21:
                 maior_pontuacao = pontos
-                vencedor = jogador.nome
-        return f"Jogador Vencedor: {vencedor}\nPontos: {maior_pontuacao}"
+                vencedor = jogador
 
+        vencedor.setSaldo(sum(apostas) - vencedor.getSaldo(), True)
+        return f"Jogador Vencedor: {vencedor.nome}\nPontos: {maior_pontuacao} Saldo Final: ${vencedor.getSaldo()}"
 
     def todos_pararam(self, jogadores):
         for jogador in jogadores:
             if jogador.getJogou() == False:
-                return False
+                return False 
         return True

@@ -5,6 +5,7 @@ dealer = Dealer(10)
 
 jogadores = []
 jogadores_final = []
+apostas =[]
 
 while True:
     try:
@@ -15,6 +16,7 @@ while True:
             print("-=" * 20)
             continue
         break
+
     except(ValueError):
         print("-=" * 20)
         print("Valor inválido!, digite um valor inteiro.")
@@ -57,24 +59,35 @@ else:
     while True:
         for i in range(qtd):
 
+            if qtd == 1:
+                print("-" * 26)
+                print("Todos os jogadores pararam!")
+                print(f"{dealer.vencedor(jogadores, apostas)} !")
+                print("-" * 26)
+                exit()
+
             if jogadores[i].getJogou() == True:
                 continue
                 
             print(f"Jogador: {jogadores[i].nome}")
             print(f"Suas cartas : {jogadores[i].getCartas()}")
             print(f"Pontos totais: {jogadores[i].totalCartas()}")
-            print(f"Seu Saldo: {jogadores[i].getSaldo()}")
-            while True:
-                try:
-                    aposta = float(input("Digite o valor de sua aposta: "))
-                    if aposta > jogadores[i].getSaldo():
-                        print("-=" * 20)
-                        print("Você não possui esse valor em sua carteira!")
-                        print("-=" * 20)
-                        continue
-                    break
-                except:
-                    print("Valor inválido, Digite um número!")
+            print(f"Seu Saldo: ${jogadores[i].getSaldo()}")
+            if jogadores[i].getApostou() == False:
+                while True:
+                    try:
+                        aposta = float(input("Digite o valor de sua aposta: "))
+                        if aposta > jogadores[i].getSaldo():
+                            print("-=" * 20)
+                            print("Você não possui esse valor em sua carteira!")
+                            print("-=" * 20)
+                            continue
+                        
+                        jogadores[i].setApostou(True)
+                        apostas.append(aposta)
+                        break
+                    except:
+                        print("Valor inválido, Digite um número!")
 
             while True:
                 try:
@@ -89,14 +102,17 @@ else:
                 jogadores[i].comprar_cartas(dealer.compraCarta())
                 
                 if jogadores[i].totalCartas() == 21:
-                    print(f"O jogador {jogadores[i].nome} completou 21 e ganhou o jogo!")
+                    jogadores[i].setSaldo(sum(apostas) - jogadores[i].getSaldo(), True)
+                    print(f"O jogador {jogadores[i].nome} completou 21 e ganhou o jogo!\nSaldo Final: ${jogadores[i].getSaldo()}")
                     exit()
 
                 elif jogadores[i].totalCartas() > 21:
                     print(f"Jogador: {jogadores[i].nome}")
                     print(f"Pontos totais: {jogadores[i].totalCartas()}")
                     print(f"Seus pontos ultrapassaram 21, Você perdeu!\n")
-                    jogadores[i].parar_estouro() 
+                    jogadores[i].parar_estouro()
+                    qtd -= 1
+
 
                 elif jogadores[i].getJogou() == True:
                     pass
@@ -123,13 +139,7 @@ else:
                         print(f"O jogador {jogadores[i].nome} parou!")
                         print("-" * 26)
                         qtd -= 1
-
-                    elif opt2 == 2:
-                        pass
-
-                    if dealer.todos_pararam(jogadores) == True:
-                        print("Todos pararam")
-                    
+                       
             elif opt == 2:
                 while True:
                     try:
@@ -148,11 +158,18 @@ else:
                     qtd -= 1
                     
                 elif opt2 == 2:
-                    pass
+                    print("a")
+
+                if dealer.todos_pararam(jogadores) == True:
+                    print("-" * 26)
+                    print("Todos os jogadores pararam!")
+                    print(f"{dealer.vencedor(jogadores, apostas)} !")
+                    print("-" * 26)
+                    exit()
 
             if dealer.todos_pararam(jogadores) == True:
                 print("-" * 26)
                 print("Todos os jogadores pararam!")
-                print(f"{dealer.vencedor(jogadores)} !")
+                print(f"{dealer.vencedor(jogadores, apostas)} !")
                 print("-" * 26)
                 exit()
