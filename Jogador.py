@@ -5,6 +5,7 @@ class Jogador:
         self.pontos = 0
         self.__cartas = []
         self.jogou = False
+        self.__saldo = 3000
 
     def comprar_cartas(self, carta):
         self.__cartas.append(carta)
@@ -38,3 +39,13 @@ class Jogador:
     def parar_estouro(self):
         if self.__estorou():
             self.jogou = True
+
+    def getSaldo(self):
+        return self.__saldo
+    
+    def setSaldo(self, newSaldo, tf):
+        if tf == True:
+            self.__saldo += newSaldo
+        elif tf == False:
+            self.__saldo -= newSaldo
+            

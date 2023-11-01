@@ -9,6 +9,11 @@ jogadores_final = []
 while True:
     try:
         qtd = int(input("Quantos jogadores vão jogar?: "))
+        if qtd == 1 or qtd == 0:
+            print("-=" * 20)
+            print("Não é possivel jogar com 0 ou 1 Jogadores!")
+            print("-=" * 20)
+            continue
         break
     except(ValueError):
         print("-=" * 20)
@@ -58,6 +63,18 @@ else:
             print(f"Jogador: {jogadores[i].nome}")
             print(f"Suas cartas : {jogadores[i].getCartas()}")
             print(f"Pontos totais: {jogadores[i].totalCartas()}")
+            print(f"Seu Saldo: {jogadores[i].getSaldo()}")
+            while True:
+                try:
+                    aposta = float(input("Digite o valor de sua aposta: "))
+                    if aposta > jogadores[i].getSaldo():
+                        print("-=" * 20)
+                        print("Você não possui esse valor em sua carteira!")
+                        print("-=" * 20)
+                        continue
+                    break
+                except:
+                    print("Valor inválido, Digite um número!")
 
             while True:
                 try:
