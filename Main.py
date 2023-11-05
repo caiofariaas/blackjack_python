@@ -59,7 +59,7 @@ else:
     while True:
         for i in range(qtd):
 
-            if qtd == 1:
+            if qtd == 1 and jogadores[i].getJogou() == True:
                 print("-" * 26)
                 print("Todos os jogadores pararam!")
                 print(f"{dealer.vencedor(jogadores, apostas)} !")
