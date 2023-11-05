@@ -107,9 +107,11 @@ else:
                     exit()
 
                 elif jogadores[i].totalCartas() > 21:
+                    print("-=" * 15)
                     print(f"Jogador: {jogadores[i].nome}")
                     print(f"Pontos totais: {jogadores[i].totalCartas()}")
                     print(f"Seus pontos ultrapassaram 21, Você perdeu!\n")
+                    print("-=" * 15)
                     jogadores[i].parar_estouro()
                     qtd -= 1
 
@@ -161,15 +163,13 @@ else:
                     print("a")
 
                 if dealer.todos_pararam(jogadores) == True:
-                    print("-" * 26)
-                    print("Todos os jogadores pararam!")
-                    print(f"{dealer.vencedor(jogadores, apostas)} !")
-                    print("-" * 26)
+                    print("-=" * 15)
+                    print(f"\n{dealer.vencedor(jogadores, apostas)} !")
+                    print("-=" * 15)
                     exit()
 
             if dealer.todos_pararam(jogadores) == True:
-                print("-" * 26)
-                print("Todos os jogadores pararam!")
-                print(f"{dealer.vencedor(jogadores, apostas)} !")
-                print("-" * 26)
+                print("-=" * 15)
+                print(f"\n{dealer.vencedor(jogadores, apostas)} !")
+                print("-=" * 15)
                 exit()
