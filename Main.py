@@ -1,11 +1,31 @@
 from Jogador import Jogador
 from Dealer import Dealer
 
-dealer = Dealer(10)
+# Funções.
 
+def prntVencedor():
+    print("\n")
+    print("-=" * 18)
+    print(f"\n{dealer.vencedor(jogadores, apostas)} !\n")
+    print("-=" * 18)
+    print("\n")
+    exit()
+
+def prntJogador():
+    print(f"\nJogador: {jogadores[i].nome}")
+    print(f"Suas cartas : {jogadores[i].getCartas()}")
+    print(f"Pontos totais: {jogadores[i].totalCartas()}")
+    print(f"Seu Saldo: ${jogadores[i].getSaldo()}\n")
+
+# Criação de listas e declaração do dealer.
+
+dealer = Dealer(10)
 jogadores = []
 jogadores_final = []
-apostas =[]
+apostas = []
+
+# Início.
+# Criação dos jogadores.
 
 while True:
     try:
@@ -46,12 +66,14 @@ for i in range(qtd):
 
 jogadores = jogadores_final
         
-if len(jogadores) == 0:
+if len(jogadores) == 0 or len(jogadores) == 1:
     print("-=" * 19)
-    print("\nNão é possivel jogar com 0 jogadores!\n")
+    print(f"\nNão é possivel jogar com {len(jogadores)} jogadores!\n")
     print("-=" * 19)
     exit()
-    
+
+# Distribuição das cartas.
+
 else:
     for jogador in jogadores:
         card = dealer.distribuirCartas(jogador)
@@ -59,21 +81,23 @@ else:
     while True:
         for i in range(qtd):
 
+# Caso Restar apenas 1 jogador e o status dele por True.
+
             if qtd == 1 and jogadores[i].getJogou() == True:
                 print("-" * 26)
-                print("Todos os jogadores pararam!")
                 print(f"{dealer.vencedor(jogadores, apostas)} !")
                 print("-" * 26)
                 exit()
 
-            if jogadores[i].getJogou() == True:
+            elif jogadores[i].getJogou() == True:
                 continue
                 
-            print(f"Jogador: {jogadores[i].nome}")
-            print(f"Suas cartas : {jogadores[i].getCartas()}")
-            print(f"Pontos totais: {jogadores[i].totalCartas()}")
-            print(f"Seu Saldo: ${jogadores[i].getSaldo()}")
+            prntJogador()
+
             if jogadores[i].getApostou() == False:
+
+# Aposta.
+
                 while True:
                     try:
                         aposta = float(input("Digite o valor de sua aposta: "))
@@ -97,35 +121,51 @@ else:
                     print("-=" * 20)
                     print("Valor inválido!, digite um valor inteiro.")
                     print("-=" * 20)
-                    
+
+# Comprar Cartas.
+
             if opt == 1:
                 jogadores[i].comprar_cartas(dealer.compraCarta())
                 
                 if jogadores[i].totalCartas() == 21:
                     jogadores[i].setSaldo(sum(apostas) - jogadores[i].getSaldo(), True)
+                    print("\n")
+                    print("-=" * 20)
                     print(f"O jogador {jogadores[i].nome} completou 21 e ganhou o jogo!\nSaldo Final: ${jogadores[i].getSaldo()}")
+                    print("-=" * 20)
+                    print("\n")
                     exit()
 
+# Caso os pontos do jogador ultrapassem 21.
+
                 elif jogadores[i].totalCartas() > 21:
-                    print("-=" * 15)
+                    print("\n")
+                    print("-=" * 18)
                     print(f"Jogador: {jogadores[i].nome}")
                     print(f"Pontos totais: {jogadores[i].totalCartas()}")
-                    print(f"Seus pontos ultrapassaram 21, Você perdeu!\n")
-                    print("-=" * 15)
+                    print(f"Seus pontos ultrapassaram 21, Você perdeu!")
+                    print("-=" * 18)
+                    print("\n")
                     jogadores[i].parar_estouro()
                     qtd -= 1
 
 
                 elif jogadores[i].getJogou() == True:
                     pass
-                
+        
+# Apenas mostro os status do jogador novamente após a compra de cartas.
+
                 else:
+                    print("\n")
                     print("-=" * 20)
                     print(f"Jogador: {jogadores[i].nome}")
                     print(f"Suas cartas : {jogadores[i].getCartas()}")
                     print(f"Pontos totais: {jogadores[i].totalCartas()}")
                     print("-=" * 20)
-                    
+                    print("\n")
+
+# Parar ou continuar no jogo.
+
                     while True:
                         try:
                             opt2 = int(input("\nSelecione uma das opções\n1 <- Parar\n2 <- Continuar\nR: "))
@@ -137,10 +177,16 @@ else:
 
                     if opt2 == 1:
                         jogadores[i].parar()
+                        print("\n")
                         print("-" * 26)
                         print(f"O jogador {jogadores[i].nome} parou!")
                         print("-" * 26)
+                        print("\n")
+                        
                         qtd -= 1
+
+                    elif opt2 == 2:
+                        continue
                        
             elif opt == 2:
                 while True:
@@ -154,22 +200,28 @@ else:
 
                 if opt2 == 1:
                     jogadores[i].parar()
+                    print("\n")
                     print("-" * 26)
                     print(f"O jogador {jogadores[i].nome} parou!")
                     print("-" * 26)
+                    print("\n")
                     qtd -= 1
                     
                 elif opt2 == 2:
-                    print("a")
+                    continue   
+
+# Verificação sobre quem foi o jogador vencedor.
 
                 if dealer.todos_pararam(jogadores) == True:
-                    print("-=" * 15)
-                    print(f"\n{dealer.vencedor(jogadores, apostas)} !")
-                    print("-=" * 15)
-                    exit()
+                    prntVencedor()
+
+                elif len(jogadores) == 2:
+                    if jogadores[i].totalCartas() > 21:
+                        prntVencedor()
 
             if dealer.todos_pararam(jogadores) == True:
-                print("-=" * 15)
-                print(f"\n{dealer.vencedor(jogadores, apostas)} !")
-                print("-=" * 15)
-                exit()
+                prntVencedor()
+
+            elif len(jogadores) == 2:
+                if jogadores[i].totalCartas() > 21:
+                    prntVencedor()

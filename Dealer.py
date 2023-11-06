@@ -29,7 +29,7 @@ class Dealer:
                 vencedor = jogador
 
         vencedor.setSaldo(sum(apostas) - vencedor.getSaldo(), True)
-        return f"Jogador Vencedor: {vencedor.nome}\nPontos: {maior_pontuacao} Saldo Final: ${vencedor.getSaldo()}"
+        return f"Jogador Vencedor: {vencedor.nome}\nPontos: {maior_pontuacao}\nGanhos nesta rodada: ${vencedor.getSaldo()}"
 
     def todos_pararam(self, jogadores):
         for jogador in jogadores:
