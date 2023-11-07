@@ -37,7 +37,7 @@ class Dealer:
             vencedor.setSaldo(sum(apostas) - vencedor.getSaldo(), True)
 
         if len(vencedores) == 1:
-            return f"Jogador Vencedor: {vencedores[0].nome}\nPontos: {maior_pontuacao}\nGanhos nesta rodada: ${vencedores[0].getSaldo()}"
+            return f"Jogador Vencedor: {vencedores[0].nome}\nPontos: {maior_pontuacao}\nGanhos nesta rodada: ${vencedores[0].getSaldo()}!"
         else:
             empate_str = "Empate entre os jogadores:\n"
             

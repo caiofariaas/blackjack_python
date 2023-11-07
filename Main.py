@@ -5,9 +5,9 @@ from Dealer import Dealer
 
 def prntVencedor():
     print("\n")
-    print("-=" * 18)
-    print(f"\n{dealer.vencedor(jogadores, apostas)} !\n")
-    print("-=" * 18)
+    print("-=" * 16)
+    print(f"\n{dealer.vencedor(jogadores, apostas)}\n")
+    print("-=" * 16)
     print("\n")
     exit()
 
@@ -92,7 +92,7 @@ else:
             if len(jogadores_ativos) == 1 and jogadores_ativos[0].jogou == True:
                 print(f"{jogadores[i].nome}")
                 print("-" * 26)
-                print(f"{dealer.vencedor(jogadores, apostas)} !")
+                print(f"{dealer.vencedor(jogadores, apostas)}")
                 print("-" * 26)
                 exit()
 
@@ -119,16 +119,20 @@ else:
                         jogadores[i].setSaldo(aposta, False)
                         print(f"Saldo Restante: ${jogadores[i].getSaldo()}\n")
                         break
-                    except:
-                        print("Valor inválido, Digite um número!")
+                    
+                    except(ValueError):
+                        print("-=" * 20)
+                        print("\nValor inválido!, digite um número.\n")
+                        print("-=" * 20)
 
             while True:
                 try:
                     opt = int(input("Deseja comprar mais uma carta?\n1 <- Sim\n2 <- Não\nR: "))
                     break
+                
                 except(ValueError):
                     print("-=" * 20)
-                    print("Valor inválido!, digite um valor inteiro.")
+                    print("\nValor inválido!, digite um valor inteiro.\n")
                     print("-=" * 20)
 
 # Comprar Cartas.
@@ -175,6 +179,7 @@ else:
 
                     if opt2 == 1:
                         jogadores[i].parar()
+                        print("\n")
                         print("-" * 26)
                         print(f"O jogador {jogadores[i].nome} parou!")
                         print("-" * 26)
@@ -186,7 +191,7 @@ else:
             elif opt == 2:
                 while True:
                     try:
-                        opt2 = int(input("Selecione uma das opções\n1 <- Parar\n2 <- Continuar\nR: "))
+                        opt2 = int(input("\nSelecione uma das opções\n1 <- Parar\n2 <- Continuar\nR: "))
                         break
                     except(ValueError):
                         print("-=" * 20)
@@ -195,6 +200,7 @@ else:
 
                 if opt2 == 1:
                     jogadores[i].parar()
+                    print("\n")
                     print("-" * 26)
                     print(f"O jogador {jogadores[i].nome} parou!")
                     print("-" * 26)
