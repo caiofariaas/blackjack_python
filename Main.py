@@ -30,6 +30,7 @@ apostas = []
 while True:
     try:
         qtd = int(input("Quantos jogadores vão jogar?: "))
+
         if qtd == 1 or qtd == 0:
             print("-=" * 20)
             print("Não é possivel jogar com 0 ou 1 Jogadores!")
@@ -65,6 +66,7 @@ for i in range(qtd):
         print("-=" * 25)
 
 jogadores = jogadores_final
+jogadores_ativos = jogadores.copy()
         
 if len(jogadores) == 0 or len(jogadores) == 1:
     print("-=" * 19)
@@ -80,18 +82,20 @@ else:
 
     while True:
         for i in range(qtd):
+            print(qtd)
 
 # Caso Restar apenas 1 jogador e o status dele por True.
 
-            if qtd == 1 and jogadores[i].getJogou() == True:
+            if len(jogadores_ativos) == 1 and jogadores_ativos[0].jogou == True:
+                print(f"{jogadores[i].nome}")
                 print("-" * 26)
                 print(f"{dealer.vencedor(jogadores, apostas)} !")
                 print("-" * 26)
                 exit()
 
-            elif jogadores[i].getJogou() == True:
+            if jogadores[i].getJogou() == True:
                 continue
-                
+                 
             prntJogador()
 
             if jogadores[i].getApostou() == False:
@@ -147,12 +151,7 @@ else:
                     print("-=" * 18)
                     print("\n")
                     jogadores[i].parar_estouro()
-                    qtd -= 1
-
-
-                elif jogadores[i].getJogou() == True:
-                    pass
-        
+                    jogadores_ativos.remove(jogadores[i])        
 # Apenas mostro os status do jogador novamente após a compra de cartas.
 
                 else:
@@ -182,8 +181,7 @@ else:
                         print(f"O jogador {jogadores[i].nome} parou!")
                         print("-" * 26)
                         print("\n")
-                        
-                        qtd -= 1
+                        jogadores_ativos.remove(jogadores[i])
 
                     elif opt2 == 2:
                         continue
@@ -205,11 +203,10 @@ else:
                     print(f"O jogador {jogadores[i].nome} parou!")
                     print("-" * 26)
                     print("\n")
-                    qtd -= 1
+                    jogadores_ativos.remove(jogadores[i])
                     
                 elif opt2 == 2:
-                    continue   
-
+                    continue
 # Verificação sobre quem foi o jogador vencedor.
 
                 if dealer.todos_pararam(jogadores) == True:
