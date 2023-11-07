@@ -56,15 +56,17 @@ for i in range(qtd):
 
     jogador = Jogador(nome, idade)
     jogadores.append(jogador)
+print("-" * 50)
 
 for i in range(qtd):
     if jogadores[i].idade >= 18:
         jogadores_final.append(jogadores[i]) 
+    
     else:
-        print("-=" * 25)
         print(f"O jogador {jogadores[i].nome} foi removido por ser menor de idade")
-        print("-=" * 25)
-
+        
+print('-' * 50)
+        
 jogadores = jogadores_final
 jogadores_ativos = jogadores.copy()
         
@@ -77,13 +79,14 @@ if len(jogadores) == 0 or len(jogadores) == 1:
 # Distribuição das cartas.
 
 else:
+    print("\nSeja bem vindo ao blackjack!\n")
     for jogador in jogadores:
         card = dealer.distribuirCartas(jogador)
 
+
     while True:
         for i in range(qtd):
-            print(qtd)
-
+            
 # Caso Restar apenas 1 jogador e o status dele por True.
 
             if len(jogadores_ativos) == 1 and jogadores_ativos[0].jogou == True:
@@ -113,13 +116,15 @@ else:
                         
                         jogadores[i].setApostou(True)
                         apostas.append(aposta)
+                        jogadores[i].setSaldo(aposta, False)
+                        print(f"Saldo Restante: ${jogadores[i].getSaldo()}\n")
                         break
                     except:
                         print("Valor inválido, Digite um número!")
 
             while True:
                 try:
-                    opt = int(input("Deseja comprar mais uma carta? (1 - Sim | 2 - nao ) : "))
+                    opt = int(input("Deseja comprar mais uma carta?\n1 <- Sim\n2 <- Não\nR: "))
                     break
                 except(ValueError):
                     print("-=" * 20)
@@ -135,7 +140,7 @@ else:
                     jogadores[i].setSaldo(sum(apostas) - jogadores[i].getSaldo(), True)
                     print("\n")
                     print("-=" * 20)
-                    print(f"O jogador {jogadores[i].nome} completou 21 e ganhou o jogo!\nSaldo Final: ${jogadores[i].getSaldo()}")
+                    print(f"O jogador {jogadores[i].nome} completou 21 e ganhou o jogo!\nSaldo Final: ${jogadores[i].getSaldo()}\nCartas: {jogadores[i].getCartas()}")
                     print("-=" * 20)
                     print("\n")
                     exit()
@@ -143,25 +148,19 @@ else:
 # Caso os pontos do jogador ultrapassem 21.
 
                 elif jogadores[i].totalCartas() > 21:
-                    print("\n")
-                    print("-=" * 18)
-                    print(f"Jogador: {jogadores[i].nome}")
-                    print(f"Pontos totais: {jogadores[i].totalCartas()}")
-                    print(f"Seus pontos ultrapassaram 21, Você perdeu!")
-                    print("-=" * 18)
-                    print("\n")
+                    print("-" * 40)
+
+                    prntJogador()
+                    
+                    print(f"Seus pontos ultrapassaram 21, Você perdeu!\n")
+                    print("-" * 40)
                     jogadores[i].parar_estouro()
-                    jogadores_ativos.remove(jogadores[i])        
+                    jogadores_ativos.remove(jogadores[i])   
+                         
 # Apenas mostro os status do jogador novamente após a compra de cartas.
 
                 else:
-                    print("\n")
-                    print("-=" * 20)
-                    print(f"Jogador: {jogadores[i].nome}")
-                    print(f"Suas cartas : {jogadores[i].getCartas()}")
-                    print(f"Pontos totais: {jogadores[i].totalCartas()}")
-                    print("-=" * 20)
-                    print("\n")
+                    prntJogador()
 
 # Parar ou continuar no jogo.
 
@@ -176,11 +175,9 @@ else:
 
                     if opt2 == 1:
                         jogadores[i].parar()
-                        print("\n")
                         print("-" * 26)
                         print(f"O jogador {jogadores[i].nome} parou!")
                         print("-" * 26)
-                        print("\n")
                         jogadores_ativos.remove(jogadores[i])
 
                     elif opt2 == 2:
@@ -198,15 +195,14 @@ else:
 
                 if opt2 == 1:
                     jogadores[i].parar()
-                    print("\n")
                     print("-" * 26)
                     print(f"O jogador {jogadores[i].nome} parou!")
                     print("-" * 26)
-                    print("\n")
                     jogadores_ativos.remove(jogadores[i])
                     
                 elif opt2 == 2:
                     continue
+                
 # Verificação sobre quem foi o jogador vencedor.
 
                 if dealer.todos_pararam(jogadores) == True:
