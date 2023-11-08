@@ -79,7 +79,7 @@ if len(jogadores) == 0 or len(jogadores) == 1:
 # Distribuição das cartas.
 
 else:
-    print("\nSeja bem vindo ao blackjack!\n")
+    print("\n🃏 Seja bem vindo ao Blackjack! 🃏")
     for jogador in jogadores:
         card = dealer.distribuirCartas(jogador)
 
@@ -144,7 +144,7 @@ else:
                     jogadores[i].setSaldo(sum(apostas) - jogadores[i].getSaldo(), True)
                     print("\n")
                     print("-=" * 20)
-                    print(f"O jogador {jogadores[i].nome} completou 21 e ganhou o jogo!\nSaldo Final: ${jogadores[i].getSaldo()}\nCartas: {jogadores[i].getCartas()}")
+                    print(f"O jogador {jogadores[i].nome} completou 21 e ganhou o jogo!\nGanhos da rodada: ${jogadores[i].getSaldo()}\nCartas: {jogadores[i].getCartas()}")
                     print("-=" * 20)
                     print("\n")
                     exit()

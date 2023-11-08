@@ -17,6 +17,8 @@ class Dealer:
     def compraCarta(self):
         carta = random.choice(self.cards)
         return carta
+    
+# Função que verifica se houve um ganhador ou se foi empate
 
     def vencedor(self, jogadores, apostas):
         
@@ -37,7 +39,7 @@ class Dealer:
             vencedor.setSaldo(sum(apostas) - vencedor.getSaldo(), True)
 
         if len(vencedores) == 1:
-            return f"Jogador Vencedor: {vencedores[0].nome}\nPontos: {maior_pontuacao}\nGanhos nesta rodada: ${vencedores[0].getSaldo()}!"
+            return f"Jogador Vencedor: {vencedores[0].nome}\nPontos: {maior_pontuacao}\nGanhos da rodada: ${vencedores[0].getSaldo()}!"
         else:
             empate_str = "Empate entre os jogadores:\n"
             
@@ -45,9 +47,11 @@ class Dealer:
                 empate_str += f"{vencedor.nome} com {vencedor.totalCartas()} pontos\n"
             return empate_str
 
+# Verifica se todos os jogadores escolheram parar
 
     def todos_pararam(self, jogadores):
         for jogador in jogadores:
             if jogador.getJogou() == False:
                 return False 
         return True
+    

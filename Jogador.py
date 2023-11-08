@@ -22,6 +22,8 @@ class Jogador:
     
     def parar(self):
         self.jogou = True
+
+# Faz a soma das cartas recebidas pelo dealer
     
     def totalCartas(self):
         valorTotal = 0
@@ -43,6 +45,9 @@ class Jogador:
 
     def getSaldo(self):
         return self.__saldo
+    
+# um Set porem com um valor booleano, caso receba True, o jogador ganhou
+#  assim ele adiciona ao seu saldo, caso False ele remove!
     
     def setSaldo(self, newSaldo, tf):
         if tf == True:
